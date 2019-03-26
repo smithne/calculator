@@ -24,35 +24,49 @@ const operators = {
     subtract: "-",
     multiply: "X",
     divide: "&divide;",
-    equals: "="
+    equals: "=",
+    name: "operators"
 }
 
 const controls = {
     clear: "Clear",
     plusMinus: "+/-",
-    percentage: "%"
+    percentage: "%",
+    name: "controls"
+}
+
+const digits = {
+    seven: "7",
+    eight: 8,
+    nine: 9,
+    four: 4,
+    five: 5,
+    six: 6,
+    one: 1,
+    two: 2,
+    three: 3,
+    zero: 0,
+    period: ".",
+    name: "digits"
 }
 
 function initializeCalculator() {
-    // add controls
-    const controlsContainer = document.querySelector('#controls');
-    for (let key in controls) {
-        console.log(key);
-        const div = document.createElement('div');
-        div.classList.add('controlButton')
-        div.setAttribute('id', key);
-        div.innerHTML = `<button id="${key}">${controls[key]}</button>`;
-        controlsContainer.appendChild(div);  
-    }
+    createButtons(controls);
+    createButtons(operators);
+    createButtons(digits);
+}
 
-    const operatorsContainer = document.querySelector('#operators');
-    for (let key in operators) {
-        console.log(key);
-        const div = document.createElement('div');
-        div.classList.add('operatorButton')
-        div.setAttribute('id', key);
-        div.innerHTML = `<button id="${key}">${operators[key]}</button>`;
-        operatorsContainer.appendChild(div);  
+function createButtons(buttonGroup) {
+    const controlsContainer = document.querySelector(`#${buttonGroup.name}`);
+    for (let key in buttonGroup) {
+        if (key != 'name') {
+            console.log(key);
+            const div = document.createElement('div');
+            div.classList.add('controlButton')
+            div.setAttribute('id', key);
+            div.innerHTML = `<button id="${key}">${buttonGroup[key]}</button>`;
+            controlsContainer.appendChild(div);  
+        }
     }
 }
 

@@ -23,6 +23,8 @@ div {
     height: 60vw;
     max-width: 280px;
     max-height: 420px;
+    min-width: 150;
+    max-width: 225;
 
 }
 
@@ -42,7 +44,13 @@ div {
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
 }
 
-#numbers {
+#digits {
     grid-area: 3 / 1 / span 4 / span 3;
     display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+#zero {
+    grid-area: 4 / 1 / span 1 / span 2;
 }
