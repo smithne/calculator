@@ -30,6 +30,9 @@ div {
 
 #display {
     grid-area: 1 / 1 / span 1 / span 4;
+    font-size: 26px;
+    text-align: end;
+    vertical-align: end;
 }
 
 #controls {

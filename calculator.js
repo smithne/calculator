@@ -1,10 +1,11 @@
 const add =  (a, b) => a + b;
-
 const subtract = (a, b) => a - b;
-
 const multiply = (a, b) => a * b;
-
 const divide = (a, b) => a / b;
+
+let num1 = "";
+let num2 = "";
+let operator = "";
 
 function operate(operation, a, b) {
     switch (operation) {
@@ -62,12 +63,65 @@ function createButtons(buttonGroup) {
         if (key != 'name') {
             console.log(key);
             const div = document.createElement('div');
-            div.classList.add('controlButton')
             div.setAttribute('id', key);
             div.innerHTML = `<button id="${key}">${buttonGroup[key]}</button>`;
-            controlsContainer.appendChild(div);  
+            controlsContainer.appendChild(div);
+            const btn = document.querySelector(`#${key}`);
+            btn.classList.add(buttonGroup.name);
+            btn.addEventListener('click', operateCalculator);
         }
     }
 }
 
+function updateDisplay(displayValue) {
+    document.querySelector('#display').textContent = displayValue;
+}
+
+function clear() {
+    num1 = "";
+    num2 = "";
+    operator = "";
+    updateDisplay(0)
+}
+
+function operateCalculator(key) {
+    // check what kind of key
+    // if clear
+
+    if (key.target.id === "clear") {
+        clear();
+        return;
+    } else if (key.target.id === "equals" && num1 && operator && num2) {
+        const result = operate(operator, Number(num1), Number(num2));
+        updateDisplay(result);
+        num1 = "";
+        num2 = "";
+        operator = "";
+        return;
+    }
+
+
+    
+    // if operator isn't set and key is a number, append that number to num1
+    if (!operator && key.target.parentElement.className === "digits") {
+        num1 += key.target.innerText;
+        updateDisplay(num1);
+    } else if (key.target.parentElement.className === "operators") {
+        operator = key.target.id;
+    } else if (operator && key.target.parentElement.className === "digits") {
+        num2 += key.target.innerText;
+        updateDisplay(num2);
+    }
+    
+
+    if (!num1) {
+        num1 = Number(key.target.innerText);
+        updateDisplay(num1);
+    }
+    
+    console.log(key);
+}
+
 initializeCalculator();
+
+updateDisplay("HELLO");
